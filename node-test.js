@@ -4,7 +4,6 @@ var url = require("url");
 
 http.createServer(function(request, response) {
 
-   
      response.writeHead(200, {"Content-Type": "text/plain"});
 
      var params = url.parse(request.url, true).query;
@@ -12,11 +11,11 @@ http.createServer(function(request, response) {
 
      var numInput = new Number(input);
      var numOutput = new Number(Math.random() * numInput).toFixed(0);
-     
+
      response.write(numOutput);
 
      response.end();
 
-}).listen(80);
+}).listen(8080);
 
-console.log("Executando a geração de números dinâmicos...");
+console.log("Server is running...");
