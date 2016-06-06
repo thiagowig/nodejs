@@ -1,16 +1,41 @@
-describe ("Calculator", function() {
+describe("Calculator", function() {
 
-    it ("should sum two numbers", function() {
-      expect(sum(1,1)).toEqual(2);
-      expect(sum(10,10)).toEqual(20);
-    });
+  beforeEach(function() {
+    console.log("beforeEach");
+  });
 
+  beforeAll(function() {
+    console.log("beforeAll");
+  });
+
+  afterEach(function() {
+    console.log("afterEach");
+  });
+
+  afterAll(function() {
+    console.log("afterAll");
+  });
+
+  describe("Testing returns", function() {
     it ("should subtract two number", function() {
-      expect(subtract(1,1)).toEqual(0);
-      expect(subtract(1,1)).not.toEqual(10);
+      expect(Calculator.subtract(1,1)).toEqual(0);
+      expect(Calculator.subtract(1,1)).not.toEqual(10);
     });
 
-    it ("should subtract two number", function() {
-      expect(returnThiago()).toContainsThiago();
+    it ("shouldn't be executed", function() {
+      expect(Calculator.returnThiago()).toContainsThiago();
     });
+  });
+
+  describe("Spying something", function() {
+    it ("testing with spy", function() {
+      spyOn(Calculator, "sumWithSomeHelp");
+
+      Calculator.sum(1,1);
+
+      expect(Calculator.sumWithSomeHelp).toHaveBeenCalled();
+      expect(Calculator.sumWithSomeHelp).toHaveBeenCalledWith(1, 1);
+    });
+  });
+
 });

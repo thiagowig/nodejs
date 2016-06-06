@@ -1,13 +1,17 @@
+function Calculator () {};
 
+Calculator.sum = function(numberOne, numberTwo) {
+  return Calculator.sumWithSomeHelp(numberOne, numberTwo);
+};
 
-sum = function(numberOne, numberTwo) {
-  return numberOne + numberTwo;
-}
-
-subtract = function(numberOne, numberTwo) {
+Calculator.subtract = function(numberOne, numberTwo) {
   return numberOne - numberTwo;
-}
+};
 
-returnThiago = function() {
+Calculator.returnThiago =  function() {
   return "Thiago";
-}
+};
+
+Calculator.sumWithSomeHelp =  function(numberOne, numberTwo) {
+  return numberOne + numberTwo;
+};
