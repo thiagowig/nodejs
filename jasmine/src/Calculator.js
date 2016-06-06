@@ -15,3 +15,8 @@ Calculator.returnThiago =  function() {
 Calculator.sumWithSomeHelp =  function(numberOne, numberTwo) {
   return numberOne + numberTwo;
 };
+
+Calculator.makeAnIntegration = function() {
+  console.log("Doing the heavy integration");
+  return false;
+}

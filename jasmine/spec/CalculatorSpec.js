@@ -28,13 +28,19 @@ describe("Calculator", function() {
   });
 
   describe("Spying something", function() {
-    it ("testing with spy", function() {
+    it ("expect thath the method is called", function() {
       spyOn(Calculator, "sumWithSomeHelp");
 
       Calculator.sum(1,1);
 
       expect(Calculator.sumWithSomeHelp).toHaveBeenCalled();
       expect(Calculator.sumWithSomeHelp).toHaveBeenCalledWith(1, 1);
+    });
+
+    it ("mocking the call", function() {
+      spyOn(Calculator, "makeAnIntegration").and.returnValue(true);
+
+      expect(Calculator.makeAnIntegration()).toBeTruthy();
     });
   });
 
