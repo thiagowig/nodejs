@@ -17,7 +17,7 @@ describe("Calculator", function() {
   });
 
   describe("Testing returns", function() {
-    it ("should subtract two number", function() {
+    it ("should subtract two numbers", function() {
       expect(Calculator.subtract(1,1)).toEqual(0);
       expect(Calculator.subtract(1,1)).not.toEqual(10);
     });
@@ -37,10 +37,18 @@ describe("Calculator", function() {
       expect(Calculator.sumWithSomeHelp).toHaveBeenCalledWith(1, 1);
     });
 
-    it ("mocking the call", function() {
+    it ("spy.and.returnValue", function() {
       spyOn(Calculator, "makeAnIntegration").and.returnValue(true);
 
       expect(Calculator.makeAnIntegration()).toBeTruthy();
+    });
+
+    it ("spy.and.callFake", function() {
+      spyOn(Calculator, "makeAnIntegration").and.callFake(function() {
+        return true;
+      });
+
+      expect(Calculator.invokeAnIntegration()).toBe(true);
     });
   });
 

@@ -20,3 +20,7 @@ Calculator.makeAnIntegration = function() {
   console.log("Doing the heavy integration");
   return false;
 }
+
+Calculator.invokeAnIntegration = function() {
+  return Calculator.makeAnIntegration();
+}
