@@ -1,16 +1,14 @@
 {
-  "name": "proxy-example",
+  "name": "static-server-example",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "static.js",
   "scripts": {
     "test": "mocha"
   },
   "author": "Thiago Fonseca",
   "license": "ISC",
   "dependencies": {
-    "atob": "^2.0.3",
-    "express": "^4.13.4",
-    "fs": "0.0.2"
+    "express": "^4.13.4"
   }
 }
