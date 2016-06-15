@@ -22,6 +22,8 @@ http.createServer(function(client_req, client_res) {
       });
     });
 
+    console.log("\n\n\n\n### PROXY: " + proxy)
+
     proxy.on("error", function(err) {
       console.log("Error on proxy");
       console.log(err);
@@ -30,6 +32,8 @@ http.createServer(function(client_req, client_res) {
     var pipe = client_req.pipe(proxy, {
       end: true
     });
+
+    console.log("\n\n\n\n### PIPE: " + pipe)
 
     pipe.on("error", function(err) {
       console.log("Error on pipe");
