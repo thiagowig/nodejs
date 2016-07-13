@@ -1,0 +1,15 @@
+{
+  "name": "proxy-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "run": "node src/index.js"
+  },
+  "author": "Thiago Fonseca",
+  "license": "ISC",
+  "dependencies": {
+    "crawler": "^0.4.3"
+  }
+}
