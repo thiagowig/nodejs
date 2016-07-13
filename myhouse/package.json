@@ -10,6 +10,9 @@
   "author": "Thiago Fonseca",
   "license": "ISC",
   "dependencies": {
-    "crawler": "^0.4.3"
+    "cheerio": "^0.20.0",
+    "crawler": "^0.4.3",
+    "mocha": "^2.5.3",
+    "request": "^2.73.0"
   }
 }

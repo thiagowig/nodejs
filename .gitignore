@@ -1,5 +1,4 @@
-api-example/node_modules/
-proxy-example/node_modules/
-static-server-example/node_modules
-myhouse/node_modules
+*/node_modules
+*/.vscode
+*/*.log
 
