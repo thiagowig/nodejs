@@ -9,6 +9,8 @@
     <% include templates/header %>
 
     <h1>My name is <%= name %></h1>
+
+    <p><%= points %></p>
     <p>Welcome to <%= title %></p>
 
     <ul>
@@ -17,6 +19,15 @@
           The number is <%= i %>
         </li>
       <% } %>
+
+      <h3><%= videodata.categoryName %></h3>
+
+      <ul>
+        <% videodata.categories.forEach(function(item) { %>
+          <li><%= item.categoryName %></li>    
+        <% }); %>
+      </ul>
     </ul>
   </body>
+
 </html>
