@@ -2,8 +2,10 @@
 
 module.exports = function(app) {
 
-    app.listen(app.get('port'), function() {
-        console.log('NTask API is running')
+    app.db.sequelize.sync().done(function() {
+        app.listen(app.get('port'), function() {
+            console.log('NTask API is running')
+        });
     });
-    
+
 }
