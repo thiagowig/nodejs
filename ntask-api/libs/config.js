@@ -1,6 +1,8 @@
 
 
 module.exports = {
+
+    // Database
     database: 'ntask',
     username: '',
     password: '',
@@ -10,5 +12,9 @@ module.exports = {
         define: {
             underscored: true
         }
-    }    
+    },
+
+    // Auth
+    jwtSecret: "Nt@sk",
+    jwtSession: {session: false}
 }; 
