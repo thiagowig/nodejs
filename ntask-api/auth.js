@@ -1,11 +1,18 @@
 
 var passport = require('passport');
-var Strategy = require('passport-jwt');
+var JwtStrategy = require('passport-jwt').Strategy;
+var ExtractJwt = require('passport-jwt').ExtractJwt;
 
 module.exports = function(app) {
-  const User = app.db.models.User;
-  const config = app.libs.config;
-  const strategy = new Strategy({secretOrKey: config.jwtSecret}, function(payload, done) {
+  var User = app.db.models.User;
+  var config = app.libs.config;
+
+  var opts = {
+    secretOrKey: config.jwtSecret,
+    jwtFromRequest: ExtractJwt.fromAuthHeader()
+  };
+  
+  var strategy = new JwtStrategy(opts, function(payload, done) {
     User.findById(payload.id)
       .then(function(user) {
         if (user) {
@@ -21,10 +28,10 @@ module.exports = function(app) {
   passport.use(strategy);
 
   return {
-    initialize = function() {
+    initialize: function() {
       passport.initialize();
     },
-    authenticate = function() {
+    authenticate: function() {
       return passport.authenticate('jwt', config.jwtSession);
     }
   }
