@@ -29,7 +29,7 @@ module.exports = function(app) {
 
   return {
     initialize: function() {
-      passport.initialize();
+      return passport.initialize();
     },
     authenticate: function() {
       return passport.authenticate('jwt', config.jwtSession);

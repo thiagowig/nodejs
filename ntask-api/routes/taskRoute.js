@@ -5,6 +5,9 @@ module.exports = function(app) {
     var Task = app.db.models.Tasks;
 
     app.route('/task')    
+        .all(function() {
+            app.auth.authenticate();
+        })
 
         .get(function(req, res) {
             Task.findAll()
@@ -27,9 +30,17 @@ module.exports = function(app) {
         });
         
     app.route('/task/:id')
+        .all(function() {
+            app.auth.authenticate();
+        })
 
         .get(function(req, res) {
-            Task.findOne({"where": req.params})
+            Task.findOne({
+                    "where": {
+                        id: req.params.id,
+                        user_id: req.user.id    
+                    }
+                })
                 .then(function(result) {
                     res.json(result);
                 })
@@ -39,7 +50,12 @@ module.exports = function(app) {
         })
 
         .put(function(req, res) {
-            Task.update(req.body, {"where": req.params})
+            Task.update(req.body, {
+                    "where": {
+                        id: req.params.id,
+                        user_id: req.user.id    
+                    }
+                })
                 .then(function(result) {
                     res.sendStatus(204);
                 })                
@@ -49,7 +65,12 @@ module.exports = function(app) {
         })
 
         .delete(function(req, res) {
-            Task.destroy({"where": req.params})
+            Task.destroy({
+                    "where": {
+                        id: req.params.id,
+                        user_id: req.user.id    
+                    }
+                })
                 .then(function(result) {
                     res.sendStatus(204);
                 })                

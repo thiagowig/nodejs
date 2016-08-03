@@ -5,6 +5,10 @@ module.exports = function(app) {
     var User = app.db.models.Users;
 
     app.route('/user/')
+        .all(function() {
+            app.auth.authenticate();
+        })
+
         .get(function(req, res) {
             User.findAll()
                 .then(function(result) {
@@ -26,6 +30,9 @@ module.exports = function(app) {
         });
         
     app.route('/user/:id')
+        .all(function() {
+            app.auth.authenticate();
+        })
 
         .get(function(req, res) {
             User.findById(req.params.id, {attributes: ["id", "name", "email"]})
