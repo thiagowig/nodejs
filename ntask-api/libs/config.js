@@ -1,20 +1,9 @@
+module.exports = function(app) {
+    var env = process.env.NODE_ENV;
+    if (Boolean(env)) {
+        return require('./config.' + env + '.js');
 
-
-module.exports = {
-
-    // Database
-    database: 'ntask',
-    username: '',
-    password: '',
-    params: {
-        dialect: 'sqlite',
-        storage:  'ntask.sqlite',
-        define: {
-            underscored: true
-        }
-    },
-
-    // Auth
-    jwtSecret: "Nt@sk",
-    jwtSession: {session: false}
-}; 
+    } else {
+        throw new Error('The environment isnt defined');
+    }
+}
