@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "NODE_ENV=tst mocha test/**/*test.js"
+    "test": "NODE_ENV=tst mocha --debug-brk test/**/*test.js"
   },
   "author": "Thiago Fonseca",
   "license": "ISC",

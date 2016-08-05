@@ -15,7 +15,7 @@ module.exports = function(app) {
                     if (Users.isPassword(user.password, password)) {
                         var payload = {id: user.id};
                         var token = jwt.encode(payload, config.jwtSecret);
-                        res.json({token: token});
+                        res.json({token: 'JWT ' + token});
                     } else {
                         res.sendStatus(401);
                     }

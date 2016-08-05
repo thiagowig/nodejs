@@ -5,9 +5,7 @@ module.exports = function(app) {
     var User = app.db.models.Users;
 
     app.route('/user/')
-        .all(function() {
-            app.auth.authenticate();
-        })
+        
 
         .get(function(req, res) {
             User.findAll()
