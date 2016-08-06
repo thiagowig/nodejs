@@ -5,11 +5,12 @@ module.exports = function(app) {
     var Task = app.db.models.Tasks;
 
     app.route('/task')    
-        .all(function() {
-            app.auth.authenticate();
-        })
 
         .get(function(req, res) {
+            var authhh = app.auth.authenticate();
+
+            console.log(authhh);
+
             Task.findAll()
                 .then(function(result) {
                     res.json(result);

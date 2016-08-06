@@ -1,22 +1,22 @@
 var jwt = require('jwt-simple');
 
 
-describe('Rpute: Task', function () {
-    var Users = app.db.models.Users;
-    var Tasks = app.db.models.Tasks;
+describe('Route: Task', function () {
+    var UsersDAO = app.db.models.Users;
+    var TasksDAO = app.db.models.Tasks;
 
     var jwtSecret = app.libs.config.jwtSecret;
 
     var token;
-    var fakeTask;
-
+    var task;
+    var user;
     
     beforeEach(function (done) {
-        Users
+        UsersDAO
             .destroy({where: {}})
             .then(function() {
 
-                return Users
+                return UsersDAO
                             .create({
                                 name:"James",
                                 email: "james@metallica.com",
@@ -24,7 +24,9 @@ describe('Rpute: Task', function () {
                             });
             })
             .then(function(user) {
-                return Tasks
+                this.user = user;
+
+                return TasksDAO
                             .bulkCreate([{
                                 title: "Go Work",
                                 user_id: user.id
@@ -36,8 +38,8 @@ describe('Rpute: Task', function () {
                             ]);
             })
             .then(function(tasks) {
-                fakeTask = tasks[0];
-                token = jwt.encode({id: user.id}, jwtSecret);
+                task = tasks[0];
+                token = jwt.encode({id: this.user.id}, jwtSecret);
             });
 
         done();

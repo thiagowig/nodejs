@@ -32,7 +32,9 @@ module.exports = function(app) {
       return passport.initialize();
     },
     authenticate: function() {
-      return passport.authenticate('jwt', config.jwtSession);
+      return passport.authenticate('jwt', function(req, res, next) {
+        console.log('Test');
+      });
     }
   }
 }
