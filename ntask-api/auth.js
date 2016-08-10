@@ -4,7 +4,7 @@ var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
 
 module.exports = function(app) {
-  var User = app.db.models.User;
+  var User = app.db.models.Users;
   var config = app.libs.config;
 
   var opts = {
@@ -32,9 +32,7 @@ module.exports = function(app) {
       return passport.initialize();
     },
     authenticate: function() {
-      return passport.authenticate('jwt', function(req, res, next) {
-        console.log('Test');
-      });
+      return passport.authenticate('jwt', config.jwtSession);
     }
   }
 }

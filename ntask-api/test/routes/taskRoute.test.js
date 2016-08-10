@@ -11,7 +11,7 @@ describe('Route: Task', function () {
     var task;
     var user;
     
-    beforeEach(function (done) {
+    before(function (done) {
         UsersDAO
             .destroy({where: {}})
             .then(function() {
@@ -27,22 +27,26 @@ describe('Route: Task', function () {
                 this.user = user;
 
                 return TasksDAO
+                    .destroy({where: {}})
+                    .then(function() {
+                        return TasksDAO
                             .bulkCreate([{
-                                title: "Go Work",
-                                user_id: user.id
-                            },
-                            {
-                                title: "Study",
-                                user_id: user.id
-                            }
+                                    title: "Go Work",
+                                    user_id: user.id
+                                },
+                                {
+                                    title: "Study",
+                                    user_id: user.id
+                                }
                             ]);
+                        
+                        }); 
             })
             .then(function(tasks) {
                 task = tasks[0];
                 token = jwt.encode({id: this.user.id}, jwtSecret);
+                done();
             });
-
-        done();
 
     });
     
@@ -54,10 +58,11 @@ describe('Route: Task', function () {
                     .set('Authorization', 'JWT ' + token)
                     .expect(200)
                     .end(function(error, res) {
-                        expect(res.body[0].title).to.eql('Work');
+                        expect(res.body.length).to.eql(2);
+                        expect(res.body[0].title).to.eql('Go Work');
+                        expect(res.body[1].title).to.eql('Study');
                         done(error);
                     })
-
             });
         });
     });
@@ -65,7 +70,7 @@ describe('Route: Task', function () {
     describe('POST /task', function () {
         describe('status 200', function () {
             it('should create a new task', function (done) {
-                
+                done();
             });
         });
     });
@@ -73,12 +78,12 @@ describe('Route: Task', function () {
      describe('GET /task/:id', function () {
         describe('status 200', function () {
             it('should return one task', function (done) {
-                
+                done();
             });
         });
         describe('status 404', function () {
             it('should throw an error when a task doesnt exists', function (done) {
-                
+                done();
             });
         });
     });
@@ -86,7 +91,7 @@ describe('Route: Task', function () {
     describe('PUT /task/:id', function () {
         describe('status 204', function () {
             it('should update a task', function (done) {
-                
+                done();
             });
         });
     });
@@ -94,7 +99,7 @@ describe('Route: Task', function () {
     describe('DELETE /task/:id', function () {
         describe('status 204', function () {
             it('should delete a task', function (done) {
-                
+                done();
             });
         });
     });

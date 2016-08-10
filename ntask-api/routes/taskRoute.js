@@ -6,11 +6,7 @@ module.exports = function(app) {
 
     app.route('/task')    
 
-        .get(function(req, res) {
-            var authhh = app.auth.authenticate();
-
-            console.log(authhh);
-
+        .get(app.auth.authenticate(), function(req, res) {
             Task.findAll()
                 .then(function(result) {
                     res.json(result);
