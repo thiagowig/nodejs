@@ -1,5 +1,6 @@
 
 var bodyParser = require('body-parser');
+var express = require('express');
 
 module.exports = function(app) {
 
@@ -15,4 +16,6 @@ module.exports = function(app) {
         }
         next();   
     });
+
+    app.use(express.static('public'));
 }

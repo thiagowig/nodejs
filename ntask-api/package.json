@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "NODE_ENV=tst mocha test/**/*test.js"
+    "start": "NODE_ENV=development npm run apidoc && node app.js",
+    "test": "NODE_ENV=tst mocha test/**/*test.js",
+    "apidoc": "apidoc -i routes/ -o public/apidoc "
   },
   "author": "Thiago Fonseca",
   "license": "ISC",
@@ -21,6 +22,7 @@
     "sqlite3": "^3.1.4"
   },
   "devDependencies": {
+    "apidoc": "^0.16.1",
     "chai": "^3.5.0",
     "mocha": "^3.0.1",
     "supertest": "^2.0.0"
