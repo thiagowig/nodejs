@@ -4,3 +4,4 @@
 *.sqlite
 *.log
 *apidoc*
+*gulpdir*
