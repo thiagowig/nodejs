@@ -4,6 +4,8 @@ var express = require('express');
 var cors = require('cors');
 var morgan = require('morgan');
 var logger = require('./logger');
+var compression = require('compression');
+var helmet = require('helmet');
 
 module.exports = function(app) {
 
@@ -20,6 +22,8 @@ module.exports = function(app) {
     app.use(bodyParser.json());
     app.use(app.auth.initialize());
     app.use(express.static('public'));
+    app.use(compression());
+    app.use(helmet());
     
     app.use(function(req, res, next) {
         if (req.body) {
