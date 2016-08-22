@@ -4,6 +4,6 @@ module.exports = function(app) {
         return require('./config.' + env + '.js');
 
     } else {
-        throw new Error('The environment isnt defined');
+        return require('./config.development.js');
     }
 }
