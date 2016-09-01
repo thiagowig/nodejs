@@ -6,6 +6,8 @@ var morgan = require('morgan');
 var logger = require('./logger');
 var compression = require('compression');
 var helmet = require('helmet');
+var monitor = require('monitor');
+monitor.start();
 
 module.exports = function(app) {
 
