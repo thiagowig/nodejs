@@ -1,0 +1,10 @@
+{
+	"client_details": {
+		"name": "Thiago",
+		"age": 30
+	},
+	"address": {
+		"city": "Belo Horizonte",
+		"country": "Brasil"
+	}
+}
