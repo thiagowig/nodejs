@@ -9,36 +9,14 @@
         "name": {
           "type": "string",
           "minLength": 1
-        },
-        "age": {
-          "type": "number"
         }
       },
       "required": [
-        "name",
-        "age"
-      ]
-    },
-    "address": {
-      "type": "object",
-      "properties": {
-        "city": {
-          "type": "string",
-          "minLength": 1
-        },
-        "country": {
-          "type": "string",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "city",
-        "country"
+        "name"
       ]
     }
   },
   "required": [
-    "client_details",
-    "address"
+    "client_details"
   ]
 }

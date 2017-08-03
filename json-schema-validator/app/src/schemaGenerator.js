@@ -13,15 +13,17 @@ module.exports.execute = function () {
             console.log('ERROR: ' + err)
         } else {
             fs.readFile('./app/files/test.json', 'utf-8', function (err, file) {
+                var Validator = require('jsonschema').Validator;
+                var v = new Validator();
+                console.log('####### ');
+                console.log(v.validate(JSON.parse(file), schema));
+
+                /*
                 var chai = require('chai');
                 chai.use(require('chai-json-schema'));
                 var assert = chai.assert
                 var result = assert.jsonSchema(JSON.parse(file), schema)
-                if (result) {
-                    console.log(result);
-                } else {
-                    console.log('Success');
-                }
+                */
             });
         }
     });
