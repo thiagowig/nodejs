@@ -1,3 +1,3 @@
-var schemaGenerator = require('./app/src/schemaGenerator')
+var server = require('./app/src/server')
 
-schemaGenerator.execute();
+server.init();
