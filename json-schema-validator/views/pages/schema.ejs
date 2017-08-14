@@ -1,0 +1,59 @@
+<!-- views/pages/about.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+
+
+
+</head>
+
+<body class="container">
+
+    <header>
+        <% include ../partials/header %>
+    </header>
+
+    <main>
+        <div class="row">
+
+            <div class="jumbotron">
+                <h3>Schemas</h3>
+
+                <div>
+                    <select class="form-control" style="width: 400px" id="selectedSchema">
+                        <% schemas.forEach(function(schema) { %>
+                            <option value="<%= schema.fileName %>"><%= schema.description %></option>
+                        <% }); %>
+                    </select>
+                </div>
+
+                <textarea id="my-code-wrapper" ></textarea>
+
+                <div>
+                    <button type="button" class="btn btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <% include ../partials/footer %>
+    </footer>
+
+    <script type="text/javascript" src="schema.js"></script>
+    
+
+
+
+    <script>
+        var flask = new CodeFlask;
+flask.run('#my-code-wrapper', { language: 'javascript', lineNumbers: true })
+    </script>
+
+
+</body>
+
+</html>

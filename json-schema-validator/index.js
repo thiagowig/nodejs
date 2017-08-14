@@ -1,3 +1,3 @@
 var server = require('./app/src/server')
 
-server.init();
+server.init(__dirname);
