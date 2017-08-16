@@ -24,16 +24,20 @@
 
                 <div>
                     <select class="form-control" style="width: 400px" id="selectedSchema">
+                            <option value=""></option>
                         <% schemas.forEach(function(schema) { %>
                             <option value="<%= schema.fileName %>"><%= schema.description %></option>
                         <% }); %>
                     </select>
                 </div>
 
-                <textarea id="my-code-wrapper" ></textarea>
+                <div id="editor"></div>
 
                 <div>
                     <button type="button" class="btn btn-primary">Salvar</button>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-danger">Importar</button>
                 </div>
             </div>
         </div>
@@ -43,15 +47,12 @@
         <% include ../partials/footer %>
     </footer>
 
+    <script src="ace.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="schema.js"></script>
-    
 
 
 
-    <script>
-        var flask = new CodeFlask;
-flask.run('#my-code-wrapper', { language: 'javascript', lineNumbers: true })
-    </script>
+
 
 
 </body>
