@@ -1,0 +1,25 @@
+{
+  "cartoes": [
+ {
+            "id_cartao": "CXVCDTKK-81fdc572d7f1abe52ec6cdb08370f838",
+            "ddd_celular": "0019",
+            "celular": "0998767770",
+            "email": "anaf@ciandt.com",
+            "flag": "0"
+          },
+          {
+            "id_cartao": "CXVCDTKK-fac1e8be3e2f78c226dd83363cee8743",
+            "ddd_celular": "0019",
+            "celular": "0998767770",
+            "email": "anaf@ciandt.com",
+            "flag": "0"
+          },
+          {
+            "id_cartao": "CXVCDTKK-834711e72d7a58b1391b61b3b740e755",
+            "ddd_celular": "0019",
+            "celular": "0998767770",
+            "email": "anaf@ciandt.com",
+            "flag": "0"
+          }
+  ]
+}

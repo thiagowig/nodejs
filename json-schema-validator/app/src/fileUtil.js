@@ -10,3 +10,23 @@ module.exports.read = function (fileName, callback) {
         }
     })
 }
+
+module.exports.save = function (name, schema, callback) {
+    fs.writeFile(name, schema, 'utf-8', function (err) {
+        if (err) {
+            callback(err)
+        } else {
+            callback()
+        }
+    });
+}
+
+module.exports.listAll = function (dir, callback) {
+    fs.readdir(dir, function (err, files) {
+        if (err) {
+            callback(err)
+        } else {
+            callback(null, files)
+        }
+    });
+}

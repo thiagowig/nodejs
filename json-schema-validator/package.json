@@ -9,6 +9,7 @@
   "author": "Thiago Fonseca",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "ejs": "^2.5.7",
     "express": "^4.15.3",
     "json-schema-generator": "^2.0.3",

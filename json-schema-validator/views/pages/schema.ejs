@@ -4,55 +4,53 @@
 <html lang="en">
 
 <head>
-    <% include ../partials/head %>
-
-
-
+  <% include ../partials/head %>
 </head>
 
 <body class="container">
 
-    <header>
-        <% include ../partials/header %>
-    </header>
+  <header>
+    <% include ../partials/header %>
+  </header>
 
-    <main>
-        <div class="row">
+  <main>
+    <div class="form-group">
+      <label for="schemaName">Nome</label>
+      <input type="text" class="form-control" id="schemaName" value="<%= name %>">
+    </div>
 
-            <div class="jumbotron">
-                <h3>Schemas</h3>
+    <div class="form-group">
+      <label for="schemaName">Schema</label>
+      <div id="editor"><%= schema %></div>
+    </div>
 
-                <div>
-                    <select class="form-control" style="width: 400px" id="selectedSchema">
-                            <option value=""></option>
-                        <% schemas.forEach(function(schema) { %>
-                            <option value="<%= schema.fileName %>"><%= schema.description %></option>
-                        <% }); %>
-                    </select>
-                </div>
+    <button id="saveButton" type="submit" class="btn btn-primary">Salvar</button>
+    <button id="importButton" type="submit" class="btn btn-warning">Importar</button>
 
-                <div id="editor"></div>
+  </main>
 
-                <div>
-                    <button type="button" class="btn btn-primary">Salvar</button>
-                </div>
-                <div>
-                    <button type="button" class="btn btn-danger">Importar</button>
-                </div>
-            </div>
-        </div>
-    </main>
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
 
-    <footer>
-        <% include ../partials/footer %>
-    </footer>
+  <script type="text/javascript" src="/ace.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/schema.js"></script>
+  <script type="text/javascript">
+    var aceEditor = window.ace.edit("editor");
 
-    <script src="ace.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="schema.js"></script>
-
-
-
-
+    aceEditor.setOptions({
+      showPrintMargin: false, // hides the vertical limiting strip
+      maxLines: 20,
+      minLines: 20,
+      fontSize: "100%" // ensures that the editor fits in the environment
+    });
+    // defines the style of the editor
+    aceEditor.setTheme("ace/theme/twilight");
+    // hides line numbers (widens the area occupied by error and warning messages)
+    aceEditor.renderer.setOption("showLineNumbers", true);
+    // ensures proper autocomplete, validation and highlighting of JavaScript code
+    aceEditor.getSession().setMode("ace/mode/json");
+  </script>
 
 
 </body>

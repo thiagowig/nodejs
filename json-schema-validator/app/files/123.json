@@ -1,22 +1,25 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "description": "",
-  "type": "object",
-  "properties": {
-    "client_details": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "minLength": 1
-        }
-      },
-      "required": [
-        "name"
-      ]
-    }
-  },
-  "required": [
-    "client_details"
-  ]
+  "name": "Faturas",
+  "schema": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+      "client_details": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    "required": [
+      "client_details"
+    ]
+  }
 }
