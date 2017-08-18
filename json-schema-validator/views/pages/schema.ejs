@@ -13,6 +13,12 @@
     <% include ../partials/header %>
   </header>
 
+  <div class="alert alert-success fade" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button><p id="alertText"></p>
+  </div>
+
   <main>
     <div class="form-group">
       <label for="schemaName">Nome</label>
@@ -21,36 +27,38 @@
 
     <div class="form-group">
       <label for="schemaName">Schema</label>
-      <div id="editor"><%= schema %></div>
+      <div id="editor">
+        <%= schema %>
+      </div>
     </div>
 
     <button id="saveButton" type="submit" class="btn btn-primary">Salvar</button>
     <button id="importButton" type="submit" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">Importar</button>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="exampleModalLabel">Importar</h4>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="message-text" class="control-label">Json de exemplo:</label>
-            <textarea class="form-control" id="jsonExample" rows="10"></textarea>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="exampleModalLabel">Importar</h4>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-        <button id="importJson" type="button" class="btn btn-primary">Importar</button>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="message-text" class="control-label">Json de exemplo:</label>
+                <textarea class="form-control" id="jsonExample" rows="10"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            <button id="importJson" type="button" class="btn btn-primary">Importar</button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-    
+
   </main>
 
   <footer>

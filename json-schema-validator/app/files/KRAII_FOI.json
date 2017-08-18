@@ -1,0 +1,61 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "description": "",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "minLength": 1
+        },
+        "logid": {
+            "type": "string",
+            "minLength": 1
+        },
+        "server": {
+            "type": "string",
+            "minLength": 1
+        },
+        "module": {
+            "type": "string",
+            "minLength": 1
+        },
+        "moduleVersion": {
+            "type": "string"
+        },
+        "VersaoApiCore": {
+            "type": "string",
+            "minLength": 1
+        },
+        "rawPath": {
+            "type": "string",
+            "minLength": 1
+        },
+        "inicio": {
+            "type": "string",
+            "minLength": 1
+        },
+        "fim": {
+            "type": "string",
+            "minLength": 1
+        },
+        "elapsed": {
+            "type": "number"
+        },
+        "status": {
+            "type": "number"
+        }
+    },
+    "required": [
+        "id",
+        "logid",
+        "server",
+        "module",
+        "moduleVersion",
+        "VersaoApiCore",
+        "rawPath",
+        "inicio",
+        "fim",
+        "elapsed",
+        "status"
+    ]
+}

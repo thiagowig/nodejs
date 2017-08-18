@@ -12,9 +12,13 @@ $(document).ready(function () {
                 method: 'POST',
                 data: data
             }).done(function (content, status, response) {
-                    content = JSON.parse(content).replace('\n', '')
+                    $(".alert").removeClass('fade')
+                    $(".alert").addClass('show')
+                    $("#alertText").html(content.message)
+
+                    //content = JSON.parse(content).replace('\n', '')
                     //$('#editor').val(content)
-                    aceEditor.setValue(content, -1)
+                    //aceEditor.setValue(content, -1)
                 }).fail(function (content, status, response) {
                     alert('Error: ' + content)
                 })
