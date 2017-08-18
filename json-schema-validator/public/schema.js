@@ -24,4 +24,26 @@ $(document).ready(function () {
         }
 
     })
+
+    $('#importJson').click(function () {
+        var data = {
+            jsonExample: $('#jsonExample').val()
+        }
+
+        if (data.jsonExample) {
+            $.ajax({
+                url: '/import',
+                method: 'POST',
+                data: data
+            }).done(function (content, status, response) {
+                    aceEditor.setValue(content.schema, -1)
+                }).fail(function (content, status, response) {
+                    alert('Error: ' + content)
+                })
+
+        } else {
+            alert('Deu ruim')
+        }
+
+    })
 })

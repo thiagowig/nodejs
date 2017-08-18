@@ -1,5 +1,13 @@
 
 
+module.exports.define = function (exampleJson, callback) {
+    var jsonSchemaGenerator = require('json-schema-generator')
+    var schema = jsonSchemaGenerator(exampleJson)
+
+    callback(null, schema)
+}
+
+
 module.exports.execute = function () {
     var fs = require('fs')
 

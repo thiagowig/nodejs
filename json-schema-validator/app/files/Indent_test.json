@@ -1,0 +1,15 @@
+{
+                        "nome": "Obter Cartões Por Programa De Recompensas",
+                        "contexto": "/mobile-cartoes-servicos-app",
+                        "uri": "/cartoes/pontos",
+                        "uid": "6e004505-13c0-4b67-a3a6-3022ff8b2bef",
+                        "uidPai": "37c31134-3695-4c30-a194-93683a75fa65",
+                        "chaveMobile": "listaSaldoProgramaPontos",
+                        "icone": "",
+                        "ordem": 25,
+                        "ativo": true,
+                        "subMenu": false,
+                        "rota": "RAIZ \u003e privado \u003e Obter Cartões Por Programa De Recompensas",
+                        "regras": [],
+                        "filhos": []
+                    }

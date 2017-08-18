@@ -1,5 +1,8 @@
 
+
+
 var fileUtil = require('./fileUtil')
+var schemaGenerator = require('./schemaGenerator')
 
 module.exports.init = function (dirname) {
     var express = require('express')
@@ -29,14 +32,14 @@ module.exports.init = function (dirname) {
         var filesDir = dirname + '/app/files/'
 
         fileUtil.listAll(filesDir, function (err, files) {
-            var schemas = files.map(function(element) {
-                var description = element 
-                description = description.replace('.json', '')
-                description = description.replace(/_/g, ' ')
+            var schemas = files.map(function (element) {
+                var fileName = element
+                fileName = fileName.replace('.json', '')
+                var description = fileName.replace(/_/g, ' ')
 
                 return {
                     description: description,
-                    fileName: element
+                    fileName: fileName
                 }
             })
 
@@ -53,15 +56,17 @@ module.exports.init = function (dirname) {
     })
 
     app.get('/schema/:schemaName', function (req, res) {
-        fileUtil.read(dirname + '/app/files/' + req.params.schemaName + '.json', function (err, content) {
+        var schemaName = req.params.schemaName
+
+        fileUtil.read(dirname + '/app/files/' + schemaName + '.json', function (err, content) {
             if (err) {
                 res.send(JSON.stringify({ status: 503, message: 'Erro: ' + JSON.stringify(err) }));
             } else {
                 var result = JSON.parse(content);
 
                 res.render('pages/schema', {
-                    name: result.name,
-                    schema: JSON.stringify(result.schema, null, 4)
+                    name: schemaName.replace(/_/g, ' '),
+                    schema: JSON.stringify(result, null, 4)
                 })
             }
 
@@ -89,7 +94,7 @@ module.exports.init = function (dirname) {
             if (err) {
                 res.send({
                     success: false,
-                    message: err
+                    message: JSON.stringify(err)
                 });
             } else {
                 res.send({
@@ -99,6 +104,26 @@ module.exports.init = function (dirname) {
             }
         })
     })
+
+    app.post('/import', function (req, res) {
+        var jsonExample = JSON.parse(req.body.jsonExample)
+
+        schemaGenerator.define(jsonExample, function(err, schema) {
+            if (err) {
+                res.send({
+                    success: false,
+                    message: JSON.stringify(err)
+                });
+            } else {
+                res.send({
+                    success: true,
+                    message: 'Sucesso ao importar o json',
+                    schema: JSON.stringify(schema, null, 4)
+                });
+            }
+        })
+        
+    });
 
     app.listen(8080)
     console.log('8080 is the magic port');
