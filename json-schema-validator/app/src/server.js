@@ -15,17 +15,24 @@ module.exports.init = function (dirname) {
     app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
     app.get('/', function (req, res) {
-        var drinks = [
-            { name: 'Bloody Mary', drunkness: 3 },
-            { name: 'Martini', drunkness: 5 },
-            { name: 'Scotch', drunkness: 10 }
-        ];
-        var tagline = "TESTE";
+        var filesDir = dirname + '/app/files/'
 
-        res.render('pages/index', {
-            drinks: drinks,
-            tagline: tagline
-        });
+        fileUtil.listAll(filesDir, function (err, files) {
+            var schemas = files.map(function (element) {
+                var fileName = element
+                fileName = fileName.replace('.json', '')
+                var description = fileName.replace(/_/g, ' ')
+
+                return {
+                    description: description,
+                    fileName: fileName
+                }
+            })
+
+            res.render('pages/validate', {
+                schemas: schemas
+            });
+        })
     })
 
     app.get('/schema/list', function (req, res) {
@@ -52,7 +59,7 @@ module.exports.init = function (dirname) {
     })
 
     app.get('/schema', function (req, res) {
-        res.render('pages/schema', { name: "", schema: "" })
+        res.render('pages/schema', { name: null, schema: null })
     })
 
     app.get('/schema/:schemaName', function (req, res) {
@@ -87,7 +94,7 @@ module.exports.init = function (dirname) {
     })
 
     app.post('/schema/save', function (req, res) {
-        var name = req.body.name.replace(' ', '_')
+        var name = req.body.name.replace(/ /g, '_')
         var schema = req.body.schema
 
         fileUtil.save(dirname + '/app/files/' + name + '.json', schema, function (err, fileName) {
@@ -100,6 +107,30 @@ module.exports.init = function (dirname) {
                 res.send({
                     success: true,
                     message: 'Sucesso ao salvar o arquivo'
+                });
+            }
+        })
+    })
+
+    app.post('/schema/validate', function (req, res) {
+        var name = req.body.name.replace(' ', '_')
+        var json = req.body.json
+
+        schemaGenerator.validate(dirname + '/app/files/' + name + '.json', json, function (err, result) {
+            if (err) {
+                res.send({
+                    success: false,
+                    message: JSON.stringify(err)
+                });
+            } else if (result.errors.length > 0) {
+                res.send({
+                    success: false,
+                    message: JSON.stringify(result.errors, null, 4)
+                });
+            } else {
+                res.send({
+                    success: true,
+                    result: 'JSON válido'
                 });
             }
         })
