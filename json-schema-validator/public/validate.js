@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    $('.menuItem').removeClass('active')
+    $('#validateMenu').addClass('active')
+
     $('#validateButton').click(function () {
         var data = {
             name: $('#selectedSchema').find(":selected").val(),
@@ -13,19 +16,26 @@ $(document).ready(function () {
                 data: data
             }).done(function (content, status, response) {
                 if (content.success) {
-                    $(".alert").removeClass('fade')
-                    $(".alert").addClass('show')
-                    $("#alertText").html(content.result)
+                    $.notify(content.message, { autoHide: false, className: "success" });
                 } else {
-                    alert('Error: ' + content.message)
+                    var errorMessage = "";
+                    if (content.message instanceof Array) {
+                        content.message.forEach(function(element) {
+                            errorMessage += element.message + "\n"
+                        });
+                    } else {
+                        errorMessage = content.message
+                    }
+
+                    $.notify("ERRO:\n" + errorMessage, { autoHide: false, className: "error" });
                 }
 
-            }).fail(function (content, status, response) {                                           
-                alert('Error: ' + JSON.stringify(content))
+            }).fail(function (content, status, response) {
+                $.notify("ERRO:\n" + JSON.stringify(content), { autoHide: false, className: "error" });
             })
 
         } else {
-            alert('Deu ruim')
+            $.notify("ERRO:\nO schema e o Json são obrigatórios", { autoHide: false, className: "error" });
         }
 
     })

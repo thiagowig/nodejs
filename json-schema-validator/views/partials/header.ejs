@@ -1,17 +1,17 @@
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Json Schema Validator</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+      aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <span class="glyphicon glyphicon glyphicon-tree-deciduous"></span>
-                Json Validator
-            </a>
-        </div>
-
-        <ul class="nav navbar-nav">
-            <li><a href="/">Validar</a></li>
-            <li><a href="/schema/list">Schemas</a></li>
-        </ul>
-
-    </div>
-</nav>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item menuItem" id="validateMenu">
+          <a class="nav-link" href="/">Validar</a>
+        </li>
+        <li class="nav-item menuItem" id="schemaMenu">
+          <a class="nav-link" href="/schema/list">Schemas</a>
+        </li>
+      </ul>
+  </nav>

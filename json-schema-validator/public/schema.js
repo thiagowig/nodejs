@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+    $('.menuItem').removeClass('active')
+    $('#schemaMenu').addClass('active')
+
     $('#saveButton').click(function () {
         var data = {
             name: $('#schemaName').val(),
@@ -12,16 +15,23 @@ $(document).ready(function () {
                 method: 'POST',
                 data: data
             }).done(function (content, status, response) {
-                    $(".alert").removeClass('fade')
-                    $(".alert").addClass('show')
-                    $("#alertText").html(content.message)
+                if (content.success) {
+                    $.notify(content.message, { autoHide: false, className: "success" });
+                } else {
+                    var errorMessage = "";
+                    if (content.message instanceof Array) {
+                        content.message.forEach(function (element) {
+                            errorMessage += element.message + "\n"
+                        });
+                    } else {
+                        errorMessage = content.message
+                    }
 
-                    //content = JSON.parse(content).replace('\n', '')
-                    //$('#editor').val(content)
-                    //aceEditor.setValue(content, -1)
-                }).fail(function (content, status, response) {
-                    alert('Error: ' + content)
-                })
+                    $.notify("ERRO:\n" + errorMessage, { autoHide: false, className: "error" });
+                }
+            }).fail(function (content, status, response) {
+                alert('Error: ' + content)
+            })
 
         } else {
             alert('Deu ruim')
@@ -40,10 +50,10 @@ $(document).ready(function () {
                 method: 'POST',
                 data: data
             }).done(function (content, status, response) {
-                    aceEditor.setValue(content.schema, -1)
-                }).fail(function (content, status, response) {
-                    alert('Error: ' + content)
-                })
+                aceEditor.setValue(content.schema, -1)
+            }).fail(function (content, status, response) {
+                alert('Error: ' + content)
+            })
 
         } else {
             alert('Deu ruim')

@@ -125,7 +125,7 @@ module.exports.init = function (dirname) {
             } else if (result.errors.length > 0) {
                 res.send({
                     success: false,
-                    message: JSON.stringify(result.errors, null, 4)
+                    message: result.errors
                 });
             } else {
                 res.send({
