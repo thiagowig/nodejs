@@ -1,3 +1,6 @@
-var server = require('./app/src/server')
+global.staticDir = __dirname + '/app/static/'
+global.fileDir = __dirname + '/app/files/'
 
-server.init(__dirname);
+var bootstrap = require('./app/src/bootstrap')
+
+bootstrap.init()
