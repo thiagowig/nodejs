@@ -13,7 +13,6 @@
     "consign": "^0.1.6",
     "ejs": "^2.5.7",
     "express": "^4.15.3",
-    "express-load": "^1.1.16",
     "json-schema-generator": "^2.0.3",
     "jsonschema": "^1.1.1"
   }
