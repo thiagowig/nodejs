@@ -11,7 +11,7 @@ $(document).ready(function () {
 
         if (data.name && data.json) {
             $.ajax({
-                url: '/schema/validate',
+                url: '/validate',
                 method: 'POST',
                 data: data
             }).done(function (content, status, response) {
@@ -21,7 +21,7 @@ $(document).ready(function () {
                     var errorMessage = "";
                     if (content.message instanceof Array) {
                         content.message.forEach(function(element) {
-                            errorMessage += element.message + "\n"
+                            errorMessage += element.stack + "\n"
                         });
                     } else {
                         errorMessage = content.message

@@ -3,8 +3,12 @@ var schemaDAO = require('../dao/schemaDAO')
 var schemaGenerator = require('../schemaGenerator')
 
 module.exports = function (app) {
-    app.get('/schema/list', function (req, res) {
 
+    app.get('/schema', function (req, res) {
+        res.render('pages/schema', { name: null, schema: null })
+    })
+
+    app.get('/schema/list', function (req, res) {
         schemaDAO.listAll(fileDir, function (err, files) {
             var schemas = files.map(function (element) {
                 var fileName = element
@@ -21,12 +25,6 @@ module.exports = function (app) {
                 schemas: schemas
             })
         })
-
-
-    })
-
-    app.get('/schema', function (req, res) {
-        res.render('pages/schema', { name: null, schema: null })
     })
 
     app.get('/schema/:schemaName', function (req, res) {
@@ -64,4 +62,24 @@ module.exports = function (app) {
             }
         })
     })
+
+    app.post('/schema/import', function (req, res) {
+        var jsonExample = JSON.parse(req.body.jsonExample)
+
+        schemaGenerator.define(jsonExample, function (err, schema) {
+            if (err) {
+                res.send({
+                    success: false,
+                    message: JSON.stringify(err)
+                })
+            } else {
+                res.send({
+                    success: true,
+                    message: 'Sucesso ao importar o json',
+                    schema: JSON.stringify(schema, null, 4)
+                })
+            }
+        })
+    })
+    
 }
