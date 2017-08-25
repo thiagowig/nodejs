@@ -1,7 +1,4 @@
 
-var fileUtil = require('./fileUtil')
-var schemaGenerator = require('./schemaGenerator')
-
 module.exports.init = function () {
     var express = require('express')
     var app = express()
@@ -11,10 +8,10 @@ module.exports.init = function () {
     app.set('view engine', 'ejs')
     app.set('views', viewsDir);
     app.use(express.static(staticDir));
-    app.use(bodyParser.json()); // support json encoded bodies
-    app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
 
-    consign().include('app/src/controller').into(app)
+    consign({verbose: false}).include('app/src/controller').into(app)
 
     app.listen(8080)
     console.log('8080 is the magic port');

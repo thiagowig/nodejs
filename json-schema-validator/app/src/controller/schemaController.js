@@ -1,11 +1,11 @@
 
-var fileUtil = require('../fileUtil')
+var schemaDAO = require('../dao/schemaDAO')
 var schemaGenerator = require('../schemaGenerator')
 
 module.exports = function (app) {
     app.get('/schema/list', function (req, res) {
 
-        fileUtil.listAll(fileDir, function (err, files) {
+        schemaDAO.listAll(fileDir, function (err, files) {
             var schemas = files.map(function (element) {
                 var fileName = element
                 fileName = fileName.replace('.json', '')
@@ -32,7 +32,7 @@ module.exports = function (app) {
     app.get('/schema/:schemaName', function (req, res) {
         var schemaName = req.params.schemaName
 
-        fileUtil.read(fileDir + schemaName + '.json', function (err, content) {
+        schemaDAO.findByName(fileDir + schemaName + '.json', function (err, content) {
             if (err) {
                 res.send(JSON.stringify({ status: 503, message: 'Erro: ' + JSON.stringify(err) }));
             } else {
@@ -50,7 +50,7 @@ module.exports = function (app) {
         var name = req.body.name.replace(/ /g, '_')
         var schema = req.body.schema
 
-        fileUtil.save(fileDir + name + '.json', schema, function (err, fileName) {
+        schemaDAO.save(fileDir + name + '.json', schema, function (err, fileName) {
             if (err) {
                 res.send({
                     success: false,

@@ -1,8 +1,8 @@
 
-var fileUtil = require('./fileUtil')
+var schemaDAO = require('./dao/schemaDAO')
 
 module.exports.validate = function (fileName, json, callback) {
-    fileUtil.read(fileName, function (err, schema) {
+    schemaDAO.findByName(fileName, function (err, schema) {
         if (err) {
             callback(err)
         } else {

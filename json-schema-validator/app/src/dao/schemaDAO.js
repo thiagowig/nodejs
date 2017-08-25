@@ -1,24 +1,24 @@
 
 var fs = require('fs')
 
-module.exports.read = function (fileName, callback) {
-    fs.readFile(fileName, 'utf-8', function(err, content) {
+module.exports.findByName = function (schemaName, callback) {
+    fs.readFile(schemaName, 'utf-8', function(err, content) {
         if (err) {
             callback(err)
         } else {
-            callback(null, content);
+            callback(null, content)
         }
     })
 }
 
-module.exports.save = function (name, schema, callback) {
-    fs.writeFile(name, schema, 'utf-8', function (err) {
+module.exports.save = function (schemaName, schemaContent, callback) {
+    fs.writeFile(schemaName, schemaContent, 'utf-8', function (err) {
         if (err) {
             callback(err)
         } else {
             callback()
         }
-    });
+    })
 }
 
 module.exports.listAll = function (dir, callback) {
@@ -28,5 +28,5 @@ module.exports.listAll = function (dir, callback) {
         } else {
             callback(null, files)
         }
-    });
+    })
 }
