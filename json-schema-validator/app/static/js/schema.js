@@ -46,7 +46,7 @@ $(document).ready(function () {
 
         if (data.jsonExample) {
             $.ajax({
-                url: '/import',
+                url: '/schema/import',
                 method: 'POST',
                 data: data
             }).done(function (content, status, response) {

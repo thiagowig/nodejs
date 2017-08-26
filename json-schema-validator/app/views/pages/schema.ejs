@@ -59,22 +59,20 @@
     <% include ../partials/footer %>
   </footer>
 
-  <script type="text/javascript" src="/ace.js" charset="utf-8"></script>
-  <script type="text/javascript" src="/schema.js"></script>
+  <script type="text/javascript" src="/js/vendor/ace.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/js/schema.js"></script>
   <script type="text/javascript">
     var aceEditor = window.ace.edit("editor");
 
     aceEditor.setOptions({
-      showPrintMargin: false, // hides the vertical limiting strip
+      showPrintMargin: false,
       maxLines: 20,
       minLines: 20,
-      fontSize: "100%" // ensures that the editor fits in the environment
+      fontSize: "100%"
     });
-    // defines the style of the editor
+    
     aceEditor.setTheme("ace/theme/twilight");
-    // hides line numbers (widens the area occupied by error and warning messages)
     aceEditor.renderer.setOption("showLineNumbers", true);
-    // ensures proper autocomplete, validation and highlighting of JavaScript code
     aceEditor.getSession().setMode("ace/mode/json");
   </script>
 
