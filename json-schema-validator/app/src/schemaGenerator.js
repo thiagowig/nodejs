@@ -6,10 +6,15 @@ module.exports.validate = function (fileName, json, callback) {
         if (err) {
             callback(err)
         } else {
-            var Validator = require('jsonschema').Validator;
-            var v = new Validator();
-            var result = v.validate(JSON.parse(json), JSON.parse(schema))
-            callback(null, result)
+            try {
+                var Validator = require('jsonschema').Validator;
+                var v = new Validator();
+                var result = v.validate(JSON.parse(json), JSON.parse(schema))
+                callback(null, result)
+            } catch (error) {
+                callback('O JSON possui erros')
+            }
+            
         }
     });
 }

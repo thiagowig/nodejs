@@ -9,6 +9,10 @@ module.exports = function (app) {
     })
 
     app.get('/schema/list', function (req, res) {
+        listSchemas(req, res)
+    })
+
+    function listSchemas(req, res) {
         schemaDAO.listAll(fileDir, function (err, files) {
             var schemas = files.map(function (element) {
                 var fileName = element
@@ -25,7 +29,7 @@ module.exports = function (app) {
                 schemas: schemas
             })
         })
-    })
+    }
 
     app.get('/schema/:schemaName', function (req, res) {
         var schemaName = req.params.schemaName
@@ -81,5 +85,17 @@ module.exports = function (app) {
             }
         })
     })
-    
+
+    app.get('/schema/remove/:schemaName', function (req, res) {
+        var schemaName = req.params.schemaName
+
+        schemaDAO.remove(fileDir + schemaName + '.json', function (err, content) {
+            if (err) {
+                res.send(JSON.stringify({ status: 503, message: 'Erro: ' + JSON.stringify(err) }));
+            } else {
+                listSchemas(req, res)
+            }
+        })
+    })
+
 }

@@ -37,15 +37,17 @@
                             </td>
                             <td>
                                 <a href="/schema/<%= schema.fileName %>">
-                        <button type="button" class="btn btn-success">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                        </button>
-                        </a>
+                                    <button type="button" class="btn btn-success">
+                                        <img src="/images/pencil.png" width="15px" />
+                                    </button>
+                                </a>
                             </td>
                             <td>
-                                <button type="button" class="btn btn-danger">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </button>
+                                <a href="/schema/remove/<%= schema.fileName %>" onclick="return confirm('Você tem certeza que deseja deletar?');">
+                                    <button type="button" class="btn btn-danger">
+                                        <img src="/images/remove.png" width="15px" />
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                         <% }); %>

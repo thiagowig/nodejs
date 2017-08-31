@@ -2,7 +2,7 @@
 var fs = require('fs')
 
 module.exports.findByName = function (schemaName, callback) {
-    fs.readFile(schemaName, 'utf-8', function(err, content) {
+    fs.readFile(schemaName, 'utf-8', function (err, content) {
         if (err) {
             callback(err)
         } else {
@@ -28,5 +28,11 @@ module.exports.listAll = function (dir, callback) {
         } else {
             callback(null, files)
         }
+    })
+}
+
+module.exports.remove = function (file, callback) {
+    fs.unlink(file, function (err) {
+        callback(err)
     })
 }

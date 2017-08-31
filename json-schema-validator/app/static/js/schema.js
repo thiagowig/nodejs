@@ -30,11 +30,11 @@ $(document).ready(function () {
                     $.notify("ERRO:\n" + errorMessage, { autoHide: false, className: "error" });
                 }
             }).fail(function (content, status, response) {
-                alert('Error: ' + content)
+                $.notify("ERRO:\n" + content, { autoHide: false, className: "error" });
             })
 
         } else {
-            alert('Deu ruim')
+            $.notify("ERRO:\nNome e schema são obrigatórios", { autoHide: false, className: "error" });
         }
 
     })
@@ -51,12 +51,13 @@ $(document).ready(function () {
                 data: data
             }).done(function (content, status, response) {
                 aceEditor.setValue(content.schema, -1)
+                $('#closeModalButton').click()
             }).fail(function (content, status, response) {
                 alert('Error: ' + content)
             })
 
         } else {
-            alert('Deu ruim')
+            $.notify("ERRO:\nÉ necessário informar um Json de exemplo", { autoHide: false, className: "error" });
         }
 
     })
