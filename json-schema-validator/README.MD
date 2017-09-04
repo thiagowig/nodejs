@@ -1,6 +1,6 @@
 # JSON SCHEMA VALIDATOR
 
-## HOT TO RUN
+## HOW TO RUN
 
 ```
 $ docker build -t json-schema-image .
