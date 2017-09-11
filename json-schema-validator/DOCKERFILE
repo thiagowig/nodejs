@@ -3,11 +3,11 @@ FROM node:7
 
 RUN mkdir -p /home/nodejs/app
 
-RUN mkdir -p /home/nodejs/app/app/files
-
 WORKDIR /home/nodejs/app
 
 COPY . /home/nodejs/app
+
+RUN mkdir -p /home/nodejs/app/app/files
 
 RUN npm install
 
