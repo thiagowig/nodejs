@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  json_schema_validator:
+    container_name: json_schema_validator
+    restart: always
+    build:
+      context: .
+    ports: 
+      - "8081:8081"
