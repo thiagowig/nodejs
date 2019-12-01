@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include partials/head %>
+</head>
+
+<body>
+
+  <header>
+    <% include partials/header %>
+  </header>
+
+  <div class="container">
+
+    <main>
+
+      <div class="form-group">
+        <label for="schemaName">Initial Json</label>
+        <div id="initialJson"></div>
+      </div>
+
+      <button id="parseResult" type="submit" class="btn btn-primary">Parse</button>
+
+      <div class="modal fade" id="modalResult" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="exampleModalLabel">Result</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <div id="resultJson"></div>
+                </div>
+              </form>
+
+              <div id="initialStructure" class="float-left"></div>
+              <div id="finalStructure" class="float-right"></div>
+
+            </div>
+            <div class="modal-footer">
+              <button id="closeModalButton" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <footer class="footer">
+    <% include partials/footer %>
+  </footer>
+
+  <script type="text/javascript" src="/js/vendor/ace.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/js/main.js"></script>
+  <script type="text/javascript">
+    var aceEditor = []
+
+    function setEditor(id) {
+      aceEditor[id] = window.ace.edit(id);
+      aceEditor[id].setOptions({
+        showPrintMargin: false,
+        maxLines: 20,
+        minLines: 20,
+        fontSize: "100%"
+      });
+
+      aceEditor[id].setTheme("ace/theme/twilight");
+      aceEditor[id].renderer.setOption("showLineNumbers", true);
+      aceEditor[id].getSession().setMode("ace/mode/json");
+    }
+
+    setEditor('initialJson')
+    setEditor('resultJson')
+  </script>
+
+
+</body>
+
+</html>
