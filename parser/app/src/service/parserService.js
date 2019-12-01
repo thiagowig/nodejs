@@ -18,13 +18,11 @@ module.exports.parse = function (initialJson) {
             newSections.push(section)
 
         } else {
-            newQuestions = section.questions
-            newFirstQuestion = _.first(newQuestions)
-
             lastSection = _.last(newSections)
+            firstQuestion = _.first(section.questions)
 
-            if (isConditionalAnswer(newFirstQuestion) || lastSection.id === section.id) {
-                lastSection.questions = lastSection.questions.concat(newQuestions)
+            if (isConditionalAnswer(firstQuestion) || lastSection.id === section.id) {
+                lastSection.questions = lastSection.questions.concat(section.questions)
 
             } else {
                 newSections.push(section)
