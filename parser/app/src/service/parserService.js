@@ -10,40 +10,29 @@ function isConditionalAnswer(question) {
 }
 
 module.exports.parse = function (initialJson) {
-    new_sections = []
+    newSections = []
 
     initialJson.sections.forEach(section => {
-        newQuestions = section.questions
-        newFirstQuestion = _.first(newQuestions)
 
-        saved_section = new_sections.filter(element => {
-            return element.id === section.id
-        })
-
-        if (!saved_section[0] && !isConditionalAnswer(newFirstQuestion)) {
-            new_sections.push(section)
-
-        } else if (isConditionalAnswer(newFirstQuestion)) {
-            lastSection = _.last(new_sections)
-            lastSection.questions = new_sections[0].questions.concat(newQuestions)
-
-        } else if (saved_section[0]) {
-            saved_section[0].questions = saved_section[0].questions.concat(newQuestions)
+        if (newSections.length === 0) {
+            newSections.push(section)
 
         } else {
-            throw new Error('Unexpected flow')
+            newQuestions = section.questions
+            newFirstQuestion = _.first(newQuestions)
+
+            lastSection = _.last(newSections)
+
+            if (isConditionalAnswer(newFirstQuestion) || lastSection.id === section.id) {
+                lastSection.questions = lastSection.questions.concat(newQuestions)
+
+            } else {
+                newSections.push(section)
+            }
         }
     });
 
-    initialJson.sections = new_sections
-
-    new_sections.forEach(section => {
-        console.log('\nSECTION: ' + section.name)
-
-        section.questions.forEach(question => {
-            console.log('QUESTION: ' + question.description)
-        })
-    })
+    initialJson.sections = newSections
 
     return initialJson
 }
