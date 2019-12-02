@@ -1,4 +1,5 @@
-parserService = require('../service/parserService')
+parserFormAnswerService = require('../service/parserFormAnswerService')
+parserAnswerService = require('../service/parserAnswerService')
 
 module.exports = function (app) {
 
@@ -6,8 +7,13 @@ module.exports = function (app) {
         res.render('index', {})
     })
     
-    app.post('/parse', function (req, res) {
-        result = parserService.parse(req.body)
+    app.post('/parseFormAnswer', function (req, res) {
+        result = parserFormAnswerService.parse(req.body)
+        res.send(JSON.stringify(result, null, 4))
+    })
+
+    app.post('/parseAnswer', function (req, res) {
+        result = parserAnswerService.parse(req.body)
         res.send(JSON.stringify(result, null, 4))
     })
 }

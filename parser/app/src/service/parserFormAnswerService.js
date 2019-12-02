@@ -1,14 +1,6 @@
 
 _ = require('lodash')
 
-function isConditionalAnswer(question) {
-    splitChar = '/'
-    conditionalAnswerLength = 2
-    pathSplitted = question.path.split(splitChar)
-
-    return pathSplitted.length > conditionalAnswerLength
-}
-
 module.exports.parse = function (initialJson) {
     newSections = []
 
@@ -33,4 +25,12 @@ module.exports.parse = function (initialJson) {
     initialJson.sections = newSections
 
     return initialJson
+}
+
+function isConditionalAnswer(question) {
+    splitChar = '/'
+    conditionalAnswerLength = 2
+    pathSplitted = question.path.split(splitChar)
+
+    return pathSplitted.length > conditionalAnswerLength
 }
