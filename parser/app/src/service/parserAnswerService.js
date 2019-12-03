@@ -13,7 +13,7 @@ module.exports.parse = function (initialJson) {
             lastSection = _.last(newSections)
 
             if (isConditionalAnswer(answer) || lastSection.id === answer.section_id) {
-                lastSection.answers = lastSection.answers.concat(answer)
+                lastSection.answers = lastSection.answers.concat(parseAnswer(answer))
 
             } else {
                 newSections.push(createNewSection(answer))
@@ -22,7 +22,9 @@ module.exports.parse = function (initialJson) {
     });
 
     return {
-        "sections": newSections
+        "dynamic_questions": {
+            "sections": newSections
+        }
     }
 }
 
@@ -30,7 +32,24 @@ function createNewSection(answer) {
     return {
         "id": answer.section_id,
         "name": answer.section_name,
-        "answers": [answer]
+        "answers": [parseAnswer(answer)]
+    }
+}
+
+function parseAnswer(answer) {
+    return {
+        "question_name": answer.question_name,
+        "question_type": answer.question_type,
+        "value": getValue(answer)
+    }
+}
+
+function getValue(answer) {
+    if (answer.option) {
+        return answer.option.name
+
+    } else {
+        return answer.value
     }
 }
 

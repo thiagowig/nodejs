@@ -60,7 +60,7 @@ $(document).ready(function () {
         structure += lineBreak
         structure += "<h4>" + id + "</h4>"
 
-        json.sections.forEach(section => {
+        json.dynamic_questions.sections.forEach(section => {
             structure += lineBreak
             structure += "<b>Section: " + section.name + "</b>"
 
