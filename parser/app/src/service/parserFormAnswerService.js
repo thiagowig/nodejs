@@ -7,24 +7,75 @@ module.exports.parse = function (initialJson) {
     initialJson.sections.forEach(section => {
 
         if (newSections.length === 0) {
-            newSections.push(section)
+            newSections.push(createSection(section))
 
         } else {
             lastSection = _.last(newSections)
             firstQuestion = _.first(section.questions)
 
             if (isConditionalAnswer(firstQuestion) || lastSection.id === section.id) {
-                lastSection.questions = lastSection.questions.concat(section.questions)
+                newQuestions = createQuestions(section.questions)
+                lastSection.questions = lastSection.questions.concat(newQuestions)
 
             } else {
-                newSections.push(section)
+                newSections.push(createSection(section))
             }
         }
     });
 
-    initialJson.sections = newSections
+    return createForm(initialJson, newSections)
+}
 
-    return initialJson
+function createSection(section) {
+    return{
+        id: section.id,
+        description: section.description,
+        name: section.name,
+        valid: true,
+        questions: createQuestions(section.questions)
+    }
+}
+
+function createQuestions(questions) {
+    newQuestions = []
+
+    questions.forEach(question => {
+        newQuestions.push(createQuestion(question))
+    })
+
+    return newQuestions
+}
+
+function createQuestion(question) {
+    return {
+        id: question.id,
+        conditional: question.conditional,
+        description: question.description,
+        order: question.order,
+        question_type_id: question.question_type_id,
+        question_validation: question.question_validation,
+        required: question.required,
+        options: question.options,
+        answer: createAnswer(question.answer)
+    }
+}
+
+function createAnswer(answer) {
+    return {
+        path: answer.path,
+        value: answer.value,
+        option: answer.option
+    }
+}
+
+function createForm(initialJson, sections) {
+    return {
+        id: initialJson.id,
+        name: initialJson.name,
+        description: initialJson.description,
+        valid: true,
+        sections: sections
+    }
 }
 
 function isConditionalAnswer(question) {
