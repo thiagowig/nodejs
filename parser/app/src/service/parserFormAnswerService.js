@@ -29,9 +29,8 @@ module.exports.parse = function (initialJson) {
 function createSection(section) {
     return{
         id: section.id,
-        description: section.description,
+        description: section.description ? section.description : null,
         name: section.name,
-        valid: true,
         questions: createQuestions(section.questions)
     }
 }
@@ -55,6 +54,7 @@ function createQuestion(question) {
         question_type_id: question.question_type_id,
         question_validation: question.question_validation,
         required: question.required,
+        path: question.path,
         options: question.options,
         answer: createAnswer(question.answer)
     }
@@ -62,7 +62,6 @@ function createQuestion(question) {
 
 function createAnswer(answer) {
     return {
-        path: answer.path,
         value: answer.value,
         option: answer.option
     }
@@ -74,7 +73,8 @@ function createForm(initialJson, sections) {
         name: initialJson.name,
         description: initialJson.description,
         valid: true,
-        sections: sections
+        sections: sections,
+        general_questions: []
     }
 }
 
